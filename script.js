@@ -49,4 +49,3 @@ function displayMovies() {
         grid.appendChild(card);
     });
 }
-displayMovies();
