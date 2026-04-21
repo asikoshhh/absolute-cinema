@@ -1,7 +1,10 @@
 // Размер зала 8 рядов, 10 мест в ряду
 const ROWS = 8;
 const COLS = 10;
-const PRICE = 350; // цена одного билета
+
+// Получаем цену из URL
+const urlParams = new URLSearchParams(window.location.search);
+let PRICE = parseInt(urlParams.get('price')) || 2500;
 
 // Загружаем занятые места из localStorage
 let bookedSeats = JSON.parse(localStorage.getItem('bookedSeats')) || [];
@@ -51,7 +54,7 @@ function toggleSeat(row, col) {
     const seatId = `${row}-${col}`;
     
     if (bookedSeats.includes(seatId)) {
-        return; // занятое место нельзя выбрать
+        return;
     }
     
     if (selectedSeats.includes(seatId)) {
@@ -66,7 +69,7 @@ function toggleSeat(row, col) {
 // Обновление UI (счётчик, сумма)
 function updateUI() {
     document.getElementById('selected-count').textContent = selectedSeats.length;
-    document.getElementById('total-price').textContent = selectedSeats.length * PRICE;
+    document.getElementById('total-price').textContent = (selectedSeats.length * PRICE).toLocaleString() + ' ₸';
 }
 
 // Подтверждение выбора
@@ -76,10 +79,14 @@ document.getElementById('continue-btn').onclick = () => {
         return;
     }
     
-    // Сохраняем выбранные места в localStorage для корзины
+    // Сохраняем выбранные места и цену в localStorage для корзины
     localStorage.setItem('cartSeats', JSON.stringify(selectedSeats));
+    localStorage.setItem('cartPrice', PRICE);
     window.location.href = 'cart.html';
 };
+
+// Отображение цены в информации
+document.getElementById('total-price').textContent = '0 ₸';
 
 // Инициализация
 renderHall();
