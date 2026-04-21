@@ -96,9 +96,3 @@
 Все задачи распределены по ролям (`PM`, `DEV`, `DES`) с помощью компонентов Jira.
 
 ---
-
-## 🧪 Как запустить локально
-
-1. Склонируй репозиторий:
-   ```bash
-   git clone https://github.com/asikoshhh/absolute-cinema.git
