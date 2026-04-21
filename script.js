@@ -4,84 +4,84 @@ const movies = [
         title: "Аватар: Путь воды",
         genre: "Фантастика",
         age: "12+",
-        poster: "https://image.openmoviedb.com/kinopoisk-poster/251733/300x450"
+        poster: "https://www.themoviedb.org/t/p/w1280/yFNn7uWudLLWDJqfj3fwh5CcUdR.jpg"
     },
     {
         id: 2,
         title: "Оппенгеймер",
         genre: "Драма",
         age: "18+",
-        poster: "https://image.openmoviedb.com/kinopoisk-poster/1154673/300x450"
+        poster: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"
     },
     {
         id: 3,
         title: "Барби",
         genre: "Комедия",
         age: "12+",
-        poster: "https://image.openmoviedb.com/kinopoisk-poster/4944512/300x450"
+        poster: "https://media.themoviedb.org/t/p/w600_and_h900_face/kau707eF6UBvrHX3v5BSYckqSXm.jpg"
     },
     {
         id: 4,
         title: "Джон Уик 4",
         genre: "Боевик",
         age: "18+",
-        poster: "https://image.openmoviedb.com/kinopoisk-poster/3697881/300x450"
+        poster: "https://media.themoviedb.org/t/p/w600_and_h900_face/o29otcx30U3EkqNVGC2feJVz5yr.jpg"
     },
     {
         id: 5,
         title: "Дюна: Часть вторая",
         genre: "Фантастика",
         age: "12+",
-        poster: "https://image.openmoviedb.com/kinopoisk-poster/476655/300x450"
+        poster: "https://media.themoviedb.org/t/p/w600_and_h900_face/3aLghRkuJc9cs770fxo4a6YWht3.jpg"
     },
     {
         id: 6,
         title: "Гладиатор 2",
         genre: "Исторический",
         age: "16+",
-        poster: "https://image.openmoviedb.com/kinopoisk-poster/1143242/300x450"
+        poster: "https://media.themoviedb.org/t/p/w600_and_h900_face/6N7F1Ga9m0CTHziA2Fs7BQczaKZ.jpg"
     },
     {
         id: 7,
         title: "Веном 3",
         genre: "Боевик",
         age: "16+",
-        poster: "https://image.openmoviedb.com/kinopoisk-poster/502778/300x450"
+        poster: "https://media.themoviedb.org/t/p/w600_and_h900_face/YFcQ65dRrLpUpMiMFrrRV6rkEs.jpg"
     },
     {
         id: 8,
         title: "Головоломка 2",
         genre: "Мультфильм",
         age: "6+",
-        poster: "https://image.openmoviedb.com/kinopoisk-poster/519309/300x450"
+        poster: "https://media.themoviedb.org/t/p/w600_and_h900_face/5fXrqBIvatwSuph7nTuSETBQYxm.jpg"
     },
     {
         id: 9,
-        title: "Мастер и Маргарита",
-        genre: "Фэнтези",
+        title: "Ғашықпын саған",
+        genre: "Мелодрама",
         age: "18+",
-        poster: "https://image.openmoviedb.com/kinopoisk-poster/475152/300x450"
+        poster: "https://i.ibb.co.com/1JzqZ3qr/70-100.webp"
     },
     {
         id: 10,
-        title: "Холоп 2",
-        genre: "Комедия",
-        age: "12+",
-        poster: "https://image.openmoviedb.com/kinopoisk-poster/530435/300x450"
+        title: "Ауру",
+        genre: "Драма",
+        age: "16+",
+        poster: "https://media.themoviedb.org/t/p/w600_and_h900_face/rmzTWoQAebplUNC4fjnemNDGQXW.jpg"
     },
     {
         id: 11,
-        title: "Бременские музыканты",
-        genre: "Семейный",
-        age: "6+",
-        poster: "https://image.openmoviedb.com/kinopoisk-poster/529185/300x450"
+        title: "Қайтадан",
+        genre: "Драма",
+        age: "16+",
+        poster: "https://media.themoviedb.org/t/p/w600_and_h900_face/n2v2Oon3MtgxYBDUeUcF4xdAAaW.jpg"
     },
     {
         id: 12,
-        title: "Лед 3",
-        genre: "Мелодрама",
+        title: "Легенда об Аанге: Последний маг воздуха",
+        genre: "Фэнтези",
         age: "12+",
-        poster: "https://image.openmoviedb.com/kinopoisk-poster/535341/300x450"
+        poster: "https://media.themoviedb.org/t/p/w600_and_h900_face/cypsdXImFEVN3NOlckf9ZVrBY6M.jpg"
     }
 ];
 
@@ -103,22 +103,13 @@ function displayMovies() {
             window.location.href = `movie.html?id=${movie.id}`;
         };
         card.innerHTML = `
-            <img class="movie-poster" src="${movie.poster}" alt="${movie.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="movie-poster-fallback" style="display: none; width: 100%; height: 300px; background: linear-gradient(135deg, #e50914 0%, #b20710 100%); align-items: center; justify-content: center; font-size: 3rem;">🎬</div>
+            <img class="movie-poster" src="${movie.poster}" alt="${movie.title}">
             <div class="movie-info">
                 <div class="movie-title">${movie.title}</div>
                 <div class="movie-genre">${movie.genre}</div>
                 <div class="movie-age ${ageClass}">${movie.age}</div>
             </div>
         `;
-        
-        // Если постер не загрузился, показываем заглушку
-        const img = card.querySelector('.movie-poster');
-        img.onerror = () => {
-            img.style.display = 'none';
-            img.nextElementSibling.style.display = 'flex';
-        };
-        
         grid.appendChild(card);
     });
 }
