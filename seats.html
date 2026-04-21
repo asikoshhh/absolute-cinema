@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absolute Cinema - Выбор мест</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🎬 Absolute Cinema</h1>
+        <p>Выберите места в зале</p>
+    </header>
+
+    <main class="seats-page">
+        <div class="screen">ЭКРАН</div>
+        
+        <div class="hall" id="hall"></div>
+        
+        <div class="seats-info">
+            <div class="legend">
+                <span><span class="seat-legend free"></span> Свободно</span>
+                <span><span class="seat-legend selected"></span> Выбрано</span>
+                <span><span class="seat-legend booked"></span> Занято</span>
+            </div>
+            <div class="selected-seats">
+                <strong>Выбрано мест:</strong> <span id="selected-count">0</span>
+            </div>
+            <div class="total-price">
+                <strong>Сумма:</strong> <span id="total-price">0</span> ₽
+            </div>
+            <button class="continue-btn" id="continue-btn">Продолжить</button>
+        </div>
+        
+        <a href="movie.html?id=1" class="back-link">← Назад к сеансам</a>
+    </main>
+
+    <script src="seats.js"></script>
+</body>
+</html>
