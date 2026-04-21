@@ -49,3 +49,6 @@ function displayMovies() {
         grid.appendChild(card);
     });
 }
+
+// ВОТ ЭТА СТРОКА БЫЛА ПРОПУЩЕНА — ЗАПУСКАЕМ ФУНКЦИЮ
+displayMovies();
