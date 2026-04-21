@@ -188,6 +188,14 @@ function displayMovieInfo() {
     // Жанры
     const genresHtml = movie.genres.map(g => `<span class="genre-tag">${g}</span>`).join('');
     document.getElementById('movie-genres').innerHTML = genresHtml;
+
+    // Постер
+const posterUrl = movie.poster || '';
+const posterContainer = document.querySelector('.poster-placeholder');
+if (posterContainer && posterUrl) {
+    posterContainer.innerHTML = `<img src="${posterUrl}" alt="${movie.title}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;" onerror="this.style.display='none'; this.parentElement.innerHTML='🎬'">`;
+}
+
 }
 
 // Показать расписание сеансов
