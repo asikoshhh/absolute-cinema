@@ -101,7 +101,7 @@ function displaySessions() {
             <div class="session-time">${session.time}</div>
             <div class="session-hall">${session.hall}</div>
             <div class="session-price">${session.price} ₽</div>
-            <button class="book-btn" onclick="alert('Вы выбрали сеанс в ${session.time}')">Выбрать</button>
+            <button class="book-btn" onclick="window.location.href='seats.html'">Выбрать</button>
         </div>
     `).join('');
     
