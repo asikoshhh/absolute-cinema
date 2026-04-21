@@ -81,22 +81,6 @@
 
 🔗 [https://asikoshhh.github.io/absolute-cinema/](https://asikoshhh.github.io/absolute-cinema/)
 
----
-
-## 📁 Структура репозитория
-
-absolute-cinema/
-├── index.html # Главная страница (афиша)
-├── movie.html # Страница фильма
-├── seats.html # Карта зала
-├── cart.html # Корзина
-├── style.css # Стили
-├── script.js # Логика главной страницы
-├── movie-script.js # Логика страницы фильма
-├── seats.js # Логика карты зала
-├── cart.js # Логика корзины
-└── README.md # Документация
-
 
 ---
 
