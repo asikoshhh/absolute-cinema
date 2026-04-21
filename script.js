@@ -34,8 +34,13 @@ function displayMovies() {
     movies.forEach(movie => {
         const card = document.createElement('div');
         card.className = 'movie-card';
+        card.onclick = () => {
+            window.location.href = `movie.html?id=${movie.id}`;
+        };
         card.innerHTML = `
-            <img class="movie-poster" src="${movie.poster}" alt="${movie.title}" onerror="this.src='https://placehold.co/300x450/0f3460/e94560?text=${encodeURIComponent(movie.title)}'">
+            <div class="movie-poster">
+                <div style="font-size: 3rem;">🎬</div>
+            </div>
             <div class="movie-info">
                 <div class="movie-title">${movie.title}</div>
                 <div class="movie-genre">${movie.genre}</div>
@@ -44,5 +49,4 @@ function displayMovies() {
         grid.appendChild(card);
     });
 }
-
 displayMovies();
