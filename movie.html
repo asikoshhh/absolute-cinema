@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absolute Cinema - Аватар: Путь воды</title>
+    <title>Absolute Cinema - Фильм</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,29 +15,27 @@
     <main class="movie-page">
         <div class="movie-container">
             <div class="movie-poster-large">
-                <div class="poster-placeholder">🎬</div>
+                <div class="poster-placeholder" id="movie-poster-icon">🎬</div>
             </div>
             
             <div class="movie-details">
-                <h1 class="movie-title-large" id="movie-title">Аватар: Путь воды</h1>
+                <h1 class="movie-title-large" id="movie-title">Загрузка...</h1>
                 
-                <div class="movie-meta">
-                    <span class="rating">⭐ 8.1</span>
-                    <span>2022</span>
-                    <span>США</span>
-                    <span>3 ч 12 мин</span>
-                    <span>12+</span>
+                <div class="movie-meta" id="movie-meta">
+                    <span class="rating">⭐ --</span>
+                    <span>----</span>
+                    <span>----</span>
+                    <span>-- ч -- мин</span>
+                    <span>--+</span>
                 </div>
                 
-                <div class="movie-genres">
-                    <span class="genre-tag">Фантастика</span>
-                    <span class="genre-tag">Боевик</span>
-                    <span class="genre-tag">Приключения</span>
+                <div class="movie-genres" id="movie-genres">
+                    <span class="genre-tag">---</span>
                 </div>
                 
                 <div class="movie-description">
                     <h3>О фильме</h3>
-                    <p id="movie-description">Джейк Салли уже много лет живёт среди синих существ на Пандоре. У него и Нейтири растут дети. Семья Салли ведёт мирную жизнь, но вскоре идиллия заканчивается: на Пандору возвращаются люди. Они полны решимости колонизировать планету любой ценой. Джейк понимает, что его семья в опасности, и решает увести близких подальше от племени. Герои находят приют у народа рифы, который существует в гармонии с океаном. Но и там им не суждено обрести покой — война настигает беглецов везде.</p>
+                    <p id="movie-description">Загрузка описания...</p>
                 </div>
                 
                 <a href="index.html" class="back-link">← Назад к афише</a>
@@ -46,33 +44,12 @@
 
         <div class="sessions-section">
             <h2>Расписание сеансов</h2>
-            <div class="sessions-list">
-                <div class="session-card">
-                    <div class="session-time">10:00</div>
-                    <div class="session-hall">Зал 1</div>
-                    <div class="session-price">250 ₽</div>
-                    <button class="book-btn" onclick="alert('Вы выбрали сеанс в 10:00')">Выбрать</button>
-                </div>
-                <div class="session-card">
-                    <div class="session-time">13:30</div>
-                    <div class="session-hall">Зал 2</div>
-                    <div class="session-price">350 ₽</div>
-                    <button class="book-btn" onclick="alert('Вы выбрали сеанс в 13:30')">Выбрать</button>
-                </div>
-                <div class="session-card">
-                    <div class="session-time">17:00</div>
-                    <div class="session-hall">Зал 1</div>
-                    <div class="session-price">400 ₽</div>
-                    <button class="book-btn" onclick="alert('Вы выбрали сеанс в 17:00')">Выбрать</button>
-                </div>
-                <div class="session-card">
-                    <div class="session-time">20:30</div>
-                    <div class="session-hall">Зал 3</div>
-                    <div class="session-price">450 ₽</div>
-                    <button class="book-btn" onclick="alert('Вы выбрали сеанс в 20:30')">Выбрать</button>
-                </div>
+            <div class="sessions-list" id="sessions-list">
+                <div class="session-card">Загрузка...</div>
             </div>
         </div>
     </main>
+
+    <script src="movie-script.js"></script>
 </body>
 </html>
