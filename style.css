@@ -544,3 +544,51 @@ main, .movies-grid, .movie-container, .seats-page, .cart-page {
     font-weight: bold;
     border: 1px solid #e50914;
 }
+
+/* Футер */
+.footer {
+    background: #0a0f1c;
+    border-top: 1px solid rgba(229, 9, 20, 0.3);
+    margin-top: 60px;
+    padding: 40px 20px 20px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    text-align: left;
+}
+
+.footer-section h3 {
+    color: #e50914;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.footer-section h4 {
+    color: #e50914;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.footer-section p {
+    color: #8e8e8e;
+    font-size: 0.85rem;
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+    color: #6c6c6c;
+    font-size: 0.75rem;
+}
