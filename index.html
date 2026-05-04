@@ -1,52 +1,202 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absolute Cinema</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Absolute Cinema — Кинотеатр в Алматы</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Index-specific */
+    .no-results {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-muted);
+      grid-column: 1/-1;
+    }
+    .no-results .no-icon { font-size: 4rem; margin-bottom: 16px; opacity: 0.4; }
+    .no-results h3 { font-size: 1.2rem; margin-bottom: 8px; color: var(--text); }
+
+    .sort-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .sort-bar label { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+    .sort-select {
+      padding: 8px 16px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      outline: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .sort-select:focus { border-color: var(--accent); }
+
+    .results-count {
+      margin-left: auto;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+
+    .now-showing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-soft);
+      border: 1px solid var(--border-hot);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 4px;
+      position: absolute;
+      top: 12px;
+      left: 12px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-    <div class="logo">
-        <div class="logo-icon">🎬</div>
-        <div>
-            <div class="logo-text">ABSOLUTE CINEMA</div>
-            <div class="logo-tag">SEE IT. FEEL IT.</div>
-        </div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🎬</div>
+      <div>
+        <div class="logo-text">ABSOLUTE CINEMA</div>
+        <div class="logo-tag">SEE IT. FEEL IT.</div>
+      </div>
+    </a>
+
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Поиск фильмов...">
     </div>
+
+    <div class="header-actions">
+      <a href="index.html" class="nav-btn">🎥 Афиша</a>
+      <a href="cart.html" class="nav-btn accent" id="cart-link">🛒 Корзина <span id="cart-count" style="display:none;background:rgba(255,255,255,0.25);border-radius:50%;width:20px;height:20px;display:none;align-items:center;justify-content:center;font-size:11px;"></span></a>
+      <button class="theme-toggle" id="theme-toggle" title="Сменить тему">🌙</button>
+    </div>
+  </div>
 </header>
 
-    <main>
-        <div class="movies-grid" id="movies-grid"></div>
-    </main>
+<!-- HERO -->
+<section class="hero" id="hero-section">
+  <div class="hero-slides" id="hero-slides"></div>
+  <div class="hero-dots" id="hero-dots"></div>
+</section>
 
-    <script src="script.js"></script>
+<!-- MAIN -->
+<main class="main-content">
 
-    <footer class="footer">
-    <div class="footer-content">
-        <div class="footer-section">
-            <h3>🎬 Absolute Cinema</h3>
-            <p>Лучшие фильмы в лучшем качестве</p>
-        </div>
-        <div class="footer-section">
-            <h4>Контакты</h4>
-            <p>📞 +7 (771) 510-53-34</p>
-            <p>✉️ kemelbaev.aktau@gmail.com</p>
-        </div>
-        <div class="footer-section">
-            <h4>Адрес</h4>
-            <p>📍 г. Алматы, ул. Кенесары Хана, 83/5</p>
-        </div>
-        <div class="footer-section">
-            <h4>Следите за нами</h4>
-            <p>📷 Instagram | 📘 Facebook</p>
-        </div>
+  <!-- Filters -->
+  <div class="section-header" style="margin-top:0;">
+    <h2 class="section-title">Сейчас в кино</h2>
+  </div>
+
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-chip active" data-genre="all">✨ Все</button>
+    <button class="filter-chip" data-genre="Фантастика">🚀 Фантастика</button>
+    <button class="filter-chip" data-genre="Боевик">💥 Боевик</button>
+    <button class="filter-chip" data-genre="Драма">🎭 Драма</button>
+    <button class="filter-chip" data-genre="Комедия">😂 Комедия</button>
+    <button class="filter-chip" data-genre="Мультфильм">🎨 Мультфильм</button>
+    <button class="filter-chip" data-genre="Фэнтези">🔮 Фэнтези</button>
+    <button class="filter-chip" data-genre="Мелодрама">💝 Мелодрама</button>
+    <button class="filter-chip" data-genre="Казахстан">🇰🇿 Казахстан</button>
+    <button class="filter-chip" data-genre="Исторический">🏛️ Исторический</button>
+  </div>
+
+  <div class="sort-bar">
+    <label>Сортировать:</label>
+    <select class="sort-select" id="sort-select">
+      <option value="default">По умолчанию</option>
+      <option value="rating">По рейтингу</option>
+      <option value="name">По названию</option>
+      <option value="year">По году</option>
+      <option value="price-asc">Сначала дешевле</option>
+    </select>
+    <span class="results-count" id="results-count"></span>
+  </div>
+
+  <div class="movies-grid" id="movies-grid"></div>
+
+  <!-- Promo Banner -->
+  <div class="promo-banner">
+    <div class="promo-text">
+      <div class="promo-badge">🎉 СПЕЦИАЛЬНОЕ ПРЕДЛОЖЕНИЕ</div>
+      <h2>Вторник — день скидок!</h2>
+      <p>Каждый вторник все билеты на утренние и дневные сеансы со скидкой 30%. Не упустите шанс сэкономить и насладиться любимым фильмом.</p>
+    </div>
+    <div>
+      <a href="#" class="btn-primary" style="font-size:1rem; padding:16px 36px;">Узнать больше →</a>
+    </div>
+  </div>
+
+  <!-- Coming soon section -->
+  <div class="section-header">
+    <h2 class="section-title">Скоро в кино</h2>
+    <a href="#" class="see-all">Все →</a>
+  </div>
+  <div class="movies-grid" id="coming-grid"></div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="margin-bottom:16px; display:inline-flex;">
+          <div class="logo-icon" style="font-size:1.4rem;">🎬</div>
+          <div style="margin-left:10px;">
+            <div class="logo-text" style="font-size:1.2rem;">ABSOLUTE CINEMA</div>
+            <div class="logo-tag">SEE IT. FEEL IT.</div>
+          </div>
+        </a>
+        <p>Лучший кинотеатр Алматы. Современное оборудование IMAX, Dolby Atmos и уютная атмосфера для незабываемого просмотра.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Навигация</h4>
+        <a href="index.html">Афиша</a>
+        <a href="#">Акции</a>
+        <a href="#">Подарочные карты</a>
+        <a href="#">О нас</a>
+      </div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <p>📞 +7 (771) 510-53-34</p>
+        <p>✉️ kemelbaev.aktau@gmail.com</p>
+        <p>📍 г. Алматы, ул. Кенесары Хана, 83/5</p>
+      </div>
+      <div class="footer-col">
+        <h4>Режим работы</h4>
+        <p>Пн–Пт: 09:00 – 24:00</p>
+        <p>Сб–Вс: 08:00 – 02:00</p>
+        <p style="margin-top:10px; color:var(--green);">● Сейчас открыто</p>
+      </div>
     </div>
     <div class="footer-bottom">
-        <p>© 2025 Absolute Cinema. Все права защищены.</p>
+      <p>© 2025 Absolute Cinema. Все права защищены.</p>
+      <div class="social-links">
+        <a class="social-btn" href="#" title="Instagram">📷</a>
+        <a class="social-btn" href="#" title="Facebook">📘</a>
+        <a class="social-btn" href="#" title="TikTok">🎵</a>
+        <a class="social-btn" href="#" title="YouTube">▶️</a>
+      </div>
     </div>
+  </div>
 </footer>
-    
+
+<script src="data.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

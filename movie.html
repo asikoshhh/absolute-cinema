@@ -1,86 +1,99 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absolute Cinema - Фильм</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Absolute Cinema — Фильм</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-    <div class="logo">
-        <div class="logo-icon">🎬</div>
-        <div>
-            <div class="logo-text">ABSOLUTE CINEMA</div>
-            <div class="logo-tag">SEE IT. FEEL IT.</div>
-        </div>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🎬</div>
+      <div>
+        <div class="logo-text">ABSOLUTE CINEMA</div>
+        <div class="logo-tag">SEE IT. FEEL IT.</div>
+      </div>
+    </a>
+    <div class="header-actions" style="margin-left:auto;">
+      <a href="index.html" class="nav-btn">← Афиша</a>
+      <a href="cart.html" class="nav-btn accent">🛒 Корзина <span id="cart-count" style="display:none;background:rgba(255,255,255,0.25);border-radius:50%;width:20px;height:20px;display:none;align-items:center;justify-content:center;font-size:11px;"></span></a>
+      <button class="theme-toggle" id="theme-toggle">🌙</button>
     </div>
+  </div>
 </header>
 
-    <main class="movie-page">
-        <div class="movie-container">
-            <div class="movie-poster-large">
-                <div class="poster-placeholder" id="movie-poster-icon">🎬</div>
-            </div>
-            
-            <div class="movie-details">
-                <h1 class="movie-title-large" id="movie-title">Загрузка...</h1>
-                
-                <div class="movie-meta" id="movie-meta">
-                    <span class="rating">⭐ --</span>
-                    <span>----</span>
-                    <span>----</span>
-                    <span>-- ч -- мин</span>
-                    <span>--+</span>
-                </div>
-                
-                <div class="movie-genres" id="movie-genres">
-                    <span class="genre-tag">---</span>
-                </div>
-                
-                <div class="movie-description">
-                    <h3>О фильме</h3>
-                    <p id="movie-description">Загрузка описания...</p>
-                </div>
-                
-                <a href="index.html" class="back-link">Назад к афише</a>
-            </div>
-        </div>
+<main class="movie-page">
+  <!-- Movie hero -->
+  <div class="movie-hero" id="movie-hero">
+    <div class="movie-poster-wrap">
+      <div class="movie-poster-placeholder" id="poster-placeholder">🎬</div>
+    </div>
+    <div class="movie-info-main">
+      <div class="movie-genres-row" id="genres-row"></div>
+      <h1 class="movie-title-main" id="movie-title">Загрузка...</h1>
+      <div class="movie-stats" id="movie-stats"></div>
+      <p class="movie-description-text" id="movie-desc">Загрузка описания...</p>
+      <a href="index.html" class="back-link">← Назад к афише</a>
+    </div>
+  </div>
 
-        <div class="sessions-section">
-            <h2>Расписание сеансов</h2>
-            <div class="sessions-list" id="sessions-list">
-                <div class="session-card">Загрузка...</div>
-            </div>
-        </div>
-    </main>
+  <!-- Sessions -->
+  <div class="sessions-section">
+    <h2>📅 Расписание сеансов</h2>
 
-    <script src="movie-script.js"></script>
+    <!-- Date tabs -->
+    <div class="session-tabs" id="date-tabs"></div>
 
-    <footer class="footer">
-    <div class="footer-content">
-        <div class="footer-section">
-            <h3>🎬 Absolute Cinema</h3>
-            <p>Лучшие фильмы в лучшем качестве</p>
-        </div>
-        <div class="footer-section">
-            <h4>Контакты</h4>
-            <p>📞 +7 (771) 510-53-34</p>
-            <p>✉️ kemelbaev.aktau@gmail.com</p>
-        </div>
-        <div class="footer-section">
-            <h4>Адрес</h4>
-            <p>📍 г. Алматы, ул. Кенесары Хана, 83/5</p>
-        </div>
-        <div class="footer-section">
-            <h4>Следите за нами</h4>
-            <p>📷 Instagram | 📘 Facebook</p>
-        </div>
+    <div class="sessions-grid" id="sessions-grid"></div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="margin-bottom:16px; display:inline-flex;">
+          <div class="logo-icon" style="font-size:1.4rem;">🎬</div>
+          <div style="margin-left:10px;">
+            <div class="logo-text" style="font-size:1.2rem;">ABSOLUTE CINEMA</div>
+            <div class="logo-tag">SEE IT. FEEL IT.</div>
+          </div>
+        </a>
+        <p>Лучший кинотеатр Алматы. Современное оборудование IMAX и уютная атмосфера.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Навигация</h4>
+        <a href="index.html">Афиша</a>
+        <a href="#">Акции</a>
+        <a href="#">О нас</a>
+      </div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <p>📞 +7 (771) 510-53-34</p>
+        <p>✉️ kemelbaev.aktau@gmail.com</p>
+        <p>📍 г. Алматы, ул. Кенесары Хана, 83/5</p>
+      </div>
+      <div class="footer-col">
+        <h4>Режим работы</h4>
+        <p>Пн–Пт: 09:00 – 24:00</p>
+        <p>Сб–Вс: 08:00 – 02:00</p>
+      </div>
     </div>
     <div class="footer-bottom">
-        <p>© 2025 Absolute Cinema. Все права защищены.</p>
+      <p>© 2025 Absolute Cinema. Все права защищены.</p>
+      <div class="social-links">
+        <a class="social-btn" href="#">📷</a>
+        <a class="social-btn" href="#">📘</a>
+        <a class="social-btn" href="#">🎵</a>
+      </div>
     </div>
+  </div>
 </footer>
-    
+
+<script src="data.js"></script>
+<script src="movie-script.js"></script>
 </body>
 </html>

@@ -1,92 +1,111 @@
-// Размер зала 8 рядов, 10 мест в ряду
+// ============================================================
+//  Seats Page Script
+// ============================================================
+
+initTheme();
+
+const urlParams = new URLSearchParams(window.location.search);
+const PRICE     = parseInt(urlParams.get('price')) || 2500;
+const HALL      = urlParams.get('hall') || 'Зал 1';
+const TIME      = urlParams.get('time') || '';
+const MOVIE     = localStorage.getItem('session-movie') || '';
+const MOVIE_ID  = localStorage.getItem('session-movie-id') || '1';
+
 const ROWS = 8;
 const COLS = 10;
 
-// Получаем цену из URL
-const urlParams = new URLSearchParams(window.location.search);
-let PRICE = parseInt(urlParams.get('price')) || 2500;
-
-// Загружаем занятые места из localStorage
-let bookedSeats = JSON.parse(localStorage.getItem('bookedSeats')) || [];
+// Seat key includes hall+time so bookings are per-session
+const storageKey = `bookedSeats_${HALL}_${TIME}`;
+let bookedSeats  = JSON.parse(localStorage.getItem(storageKey)) || generateRandomBooked();
 let selectedSeats = [];
 
-// Функция сохранения занятых мест
-function saveBookedSeats() {
-    localStorage.setItem('bookedSeats', JSON.stringify(bookedSeats));
+// Pre-populate some random booked seats for realism
+function generateRandomBooked() {
+  const taken = [];
+  const count = Math.floor(Math.random() * 18) + 5; // 5-22 taken
+  while (taken.length < count) {
+    const r = Math.ceil(Math.random() * ROWS);
+    const c = Math.ceil(Math.random() * COLS);
+    const id = `${r}-${c}`;
+    if (!taken.includes(id)) taken.push(id);
+  }
+  localStorage.setItem(storageKey, JSON.stringify(taken));
+  return taken;
 }
 
-// Функция отображения зала
+// Session info bar
+document.getElementById('session-info-bar').innerHTML = `
+  <div class="session-info-item">🎬 <strong>${MOVIE || 'Фильм'}</strong></div>
+  <div class="session-info-item">🏛️ <span>${HALL}</span></div>
+  ${TIME ? `<div class="session-info-item">⏰ <span>${TIME}</span></div>` : ''}
+  <div class="session-info-item">💳 <span>от <strong>${PRICE.toLocaleString()} ₸</strong> / место</span></div>
+`;
+
+// Render hall
 function renderHall() {
-    const hall = document.getElementById('hall');
-    hall.innerHTML = '';
-    
-    for (let row = 1; row <= ROWS; row++) {
-        const rowDiv = document.createElement('div');
-        rowDiv.className = 'row';
-        rowDiv.innerHTML = `<div class="row-label">Ряд ${row}</div>`;
-        
-        for (let col = 1; col <= COLS; col++) {
-            const seatId = `${row}-${col}`;
-            const seat = document.createElement('div');
-            seat.className = 'seat';
-            
-            if (bookedSeats.includes(seatId)) {
-                seat.classList.add('booked');
-            } else if (selectedSeats.includes(seatId)) {
-                seat.classList.add('selected');
-            } else {
-                seat.classList.add('free');
-            }
-            
-            seat.textContent = col;
-            seat.onclick = () => toggleSeat(row, col);
-            rowDiv.appendChild(seat);
-        }
-        
-        hall.appendChild(rowDiv);
+  const hall = document.getElementById('hall');
+  hall.innerHTML = '';
+
+  for (let row = 1; row <= ROWS; row++) {
+    const rowDiv = document.createElement('div');
+    rowDiv.className = 'row';
+    rowDiv.innerHTML = `<div class="row-label">Ряд ${row}</div>`;
+
+    for (let col = 1; col <= COLS; col++) {
+      const seatId = `${row}-${col}`;
+      const seat = document.createElement('div');
+      seat.className = 'seat';
+      seat.textContent = col;
+
+      if (bookedSeats.includes(seatId)) {
+        seat.classList.add('booked');
+        seat.title = 'Место занято';
+      } else if (selectedSeats.includes(seatId)) {
+        seat.classList.add('selected');
+        seat.title = `Ряд ${row}, место ${col} — выбрано`;
+      } else {
+        seat.classList.add('free');
+        seat.title = `Ряд ${row}, место ${col}`;
+        seat.addEventListener('click', () => toggleSeat(row, col));
+      }
+
+      rowDiv.appendChild(seat);
     }
-    
-    updateUI();
+
+    hall.appendChild(rowDiv);
+  }
+
+  updatePanel();
 }
 
-// Переключение выбора места
 function toggleSeat(row, col) {
-    const seatId = `${row}-${col}`;
-    
-    if (bookedSeats.includes(seatId)) {
-        return;
-    }
-    
-    if (selectedSeats.includes(seatId)) {
-        selectedSeats = selectedSeats.filter(s => s !== seatId);
-    } else {
-        selectedSeats.push(seatId);
-    }
-    
-    renderHall();
+  const id = `${row}-${col}`;
+  if (selectedSeats.includes(id)) {
+    selectedSeats = selectedSeats.filter(s => s !== id);
+  } else {
+    selectedSeats.push(id);
+  }
+  renderHall();
 }
 
-// Обновление UI (счётчик, сумма)
-function updateUI() {
-    document.getElementById('selected-count').textContent = selectedSeats.length;
-    document.getElementById('total-price').textContent = (selectedSeats.length * PRICE).toLocaleString() + ' ₸';
+function updatePanel() {
+  document.getElementById('selected-count').textContent = selectedSeats.length;
+  document.getElementById('total-price').textContent =
+    (selectedSeats.length * PRICE).toLocaleString() + ' ₸';
 }
 
-// Подтверждение выбора
-document.getElementById('continue-btn').onclick = () => {
-    if (selectedSeats.length === 0) {
-        alert('Выберите хотя бы одно место');
-        return;
-    }
-    
-    // Сохраняем выбранные места и цену в localStorage для корзины
-    localStorage.setItem('cartSeats', JSON.stringify(selectedSeats));
-    localStorage.setItem('cartPrice', PRICE);
-    window.location.href = 'cart.html';
-};
+document.getElementById('continue-btn').addEventListener('click', () => {
+  if (selectedSeats.length === 0) {
+    showToast('Ни одного места', 'Выберите хотя бы одно место', 'error');
+    return;
+  }
+  localStorage.setItem('cartSeats', JSON.stringify(selectedSeats));
+  localStorage.setItem('cartPrice', PRICE);
+  localStorage.setItem('cartHall', HALL);
+  localStorage.setItem('cartTime', TIME);
+  localStorage.setItem('cartMovie', MOVIE);
+  localStorage.setItem('cartMovieId', MOVIE_ID);
+  window.location.href = 'cart.html';
+});
 
-// Отображение цены в информации
-document.getElementById('total-price').textContent = '0 ₸';
-
-// Инициализация
 renderHall();

@@ -1,71 +1,115 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absolute Cinema - Выбор мест</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Absolute Cinema — Выбор мест</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .session-info-bar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 26px;
+      margin-bottom: 36px;
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .session-info-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+    }
+    .session-info-item strong { color: var(--text); font-weight: 600; }
+    .session-info-item span { color: var(--text-muted); }
+
+    .hall-wrap {
+      overflow-x: auto;
+      padding-bottom: 12px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-    <div class="logo">
-        <div class="logo-icon">🎬</div>
-        <div>
-            <div class="logo-text">ABSOLUTE CINEMA</div>
-            <div class="logo-tag">SEE IT. FEEL IT.</div>
-        </div>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🎬</div>
+      <div>
+        <div class="logo-text">ABSOLUTE CINEMA</div>
+        <div class="logo-tag">SEE IT. FEEL IT.</div>
+      </div>
+    </a>
+    <div class="header-actions" style="margin-left:auto;">
+      <a href="#" onclick="history.back(); return false;" class="nav-btn">← Назад</a>
+      <a href="cart.html" class="nav-btn accent">🛒 Корзина</a>
+      <button class="theme-toggle" id="theme-toggle">🌙</button>
     </div>
+  </div>
 </header>
 
-    <main class="seats-page">
-        <div class="screen">ЭКРАН</div>
-        
-        <div class="hall" id="hall"></div>
-        
-        <div class="seats-info">
-            <div class="legend">
-                <span><span class="seat-legend free"></span> Свободно</span>
-                <span><span class="seat-legend selected"></span> Выбрано</span>
-                <span><span class="seat-legend booked"></span> Занято</span>
-            </div>
-            <div class="selected-seats">
-                <strong>Выбрано мест:</strong> <span id="selected-count">0</span>
-            </div>
-            <div class="total-price">
-                <strong>Сумма:</strong> <span id="total-price">0</span> ₽
-            </div>
-            <button class="continue-btn" id="continue-btn">Продолжить</button>
-        </div>
-        
-        <a href="movie.html?id=1" class="back-link">Назад к сеансам</a>
-    </main>
+<main class="seats-page">
+  <div class="page-header">
+    <h1>🪑 Выбор мест</h1>
+  </div>
 
-    <script src="seats.js"></script>
+  <!-- Session info -->
+  <div class="session-info-bar" id="session-info-bar"></div>
 
-    <footer class="footer">
-    <div class="footer-content">
-        <div class="footer-section">
-            <h3>🎬 Absolute Cinema</h3>
-            <p>Лучшие фильмы в лучшем качестве</p>
-        </div>
-        <div class="footer-section">
-            <h4>Контакты</h4>
-            <p>📞 +7 (771) 510-53-34</p>
-            <p>✉️ kemelbaev.aktau@gmail.com</p>
-        </div>
-        <div class="footer-section">
-            <h4>Адрес</h4>
-            <p>📍 г. Алматы, ул. Кенесары Хана, 83/5</p>
-        </div>
-        <div class="footer-section">
-            <h4>Следите за нами</h4>
-            <p>📷 Instagram | 📘 Facebook</p>
-        </div>
+  <!-- Screen -->
+  <div class="screen-wrap">
+    <div class="screen">ЭКРАН</div>
+    <div class="screen-label">Все места хорошо видны с любой точки зала</div>
+  </div>
+
+  <!-- Hall -->
+  <div class="hall-wrap">
+    <div class="hall" id="hall"></div>
+  </div>
+
+  <!-- Bottom panel -->
+  <div class="seats-panel" id="seats-panel">
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-seat free"></div>Свободно
+      </div>
+      <div class="legend-item">
+        <div class="legend-seat selected"></div>Выбрано
+      </div>
+      <div class="legend-item">
+        <div class="legend-seat booked"></div>Занято
+      </div>
     </div>
-    <div class="footer-bottom">
-        <p>© 2025 Absolute Cinema. Все права защищены.</p>
+    <div class="panel-stat">
+      <div class="panel-stat-value" id="selected-count">0</div>
+      <div class="panel-stat-label">Мест</div>
     </div>
+    <div>
+      <div class="panel-stat-label" style="margin-bottom:4px;">Итого</div>
+      <div class="panel-total" id="total-price">0 ₸</div>
+    </div>
+    <div></div>
+    <button class="continue-btn" id="continue-btn">Перейти в корзину →</button>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-bottom" style="border-top:none;padding-top:0;">
+      <p>© 2025 Absolute Cinema. Все права защищены.</p>
+      <div class="social-links">
+        <a class="social-btn" href="#">📷</a>
+        <a class="social-btn" href="#">📘</a>
+      </div>
+    </div>
+  </div>
 </footer>
-    
+
+<script src="data.js"></script>
+<script src="seats.js"></script>
 </body>
 </html>
